@@ -14,14 +14,14 @@
             <?= csrf_field() ?>
 
             <div class="mb-5 sm:block md:flex items-center">
-                <label class="block mb-2 md:mb-0 text-sm text-gray-900 dark:text-white md:w-1/4">Nomor Rekam Medis</label>
+                <label class="block mb-2 md:mb-0 text-sm text-gray-900 dark:text-white md:w-1/4">Nomor Rekam Medis<span class="text-red-600">*</span></label>
                 <input type="text" name="nomor_rm" value="<?= $resepobatracikan['nomor_rm'] ?? '' ?>" class="border border-gray-300 text-gray-900 text-sm rounded-lg p-2 w-full lg:w-1/4 dark:border-gray-600 dark:text-white" maxlength="80" required>
-                <label class="block mt-5 md:my-0 md:ml-10 mb-2 text-sm text-gray-900 dark:text-white w-1/5">Nomor Rawat</label>
+                <label class="block mt-5 md:my-0 md:ml-10 mb-2 text-sm text-gray-900 dark:text-white w-1/5">Nomor Rawat<span class="text-red-600">*</span></label>
                 <input name="nomor_rawat" value="<?= $resepobatracikan['no_rawat'] ?? '' ?>" class="border border-gray-300 text-gray-900 text-sm rounded-lg p-2 w-full md:w-1/4 dark:border-gray-600 dark:text-white">
             </div>
             
             <div class="mb-5 sm:block md:flex items-center">
-                <label for="kode_dokter" class="block mb-2 md:mb-0 text-sm text-gray-900 dark:text-white md:w-1/4">Dokter Peresep</label>
+                <label for="kode_dokter" class="block mb-2 md:mb-0 text-sm text-gray-900 dark:text-white md:w-1/4">Dokter Peresep<span class="text-red-600">*</span></label>
                     <select id="kode_dokter" name="kode_dokter" class="border border-gray-300 text-gray-900 text-sm rounded-lg p-2 w-full lg:w-1/4 dark:border-gray-600 dark:text-white" required>
                         <option value="">Pilih Dokter</option>
                         <!-- Options akan diisi lewat JavaScript -->
@@ -30,25 +30,28 @@
                     $generated_no_resep = 'RSP' . date('Ymd') . rand(1000, 9999);
                 ?>
                 <label class="block mt-5 md:my-0 md:ml-10 mb-2 text-sm text-gray-900 dark:text-white w-1/5">Nomor Resep</label>
-                <input name="no_resep" value="<?= $generated_no_resep ?>" class="border border-gray-300 text-gray-900 text-sm rounded-lg p-2 w-full md:w-1/4 dark:border-gray-600 dark:text-white">
+                <input name="no_resep" value="<?= $generated_no_resep ?>" class="border border-gray-300 text-gray-900 text-sm rounded-lg p-2 w-full md:w-1/4 dark:border-gray-600 dark:text-white" readonly>
             </div>
 
             <div class="mb-5 sm:block md:flex items-center">
+                <?php
+                    $generated_no_racik = 'RSR' . date('Ymd') . rand(1000, 9999);
+                ?>
                 <label class="block mb-2 md:mb-0 text-sm text-gray-900 dark:text-white md:w-1/4">No. Racik</label>
-                <input type="text" name="no_racik" class="border border-gray-300 text-gray-900 text-sm rounded-lg p-2 w-full lg:w-1/4 dark:border-gray-600 dark:text-white" maxlength="80" required>
-                <label class="block mt-5 md:my-0 md:ml-10 mb-2 text-sm text-gray-900 dark:text-white w-1/5">Nama Racikan</label>
-                <input name="nama_racik" class="border border-gray-300 text-gray-900 text-sm rounded-lg p-2 w-full md:w-1/4 dark:border-gray-600 dark:text-white">
+                <input type="text" name="no_racik" value="<?= $generated_no_racik ?>" class="border border-gray-300 text-gray-900 text-sm rounded-lg p-2 w-full lg:w-1/4 dark:border-gray-600 dark:text-white" maxlength="80" required readonly>
+                <label class="block mt-5 md:my-0 md:ml-10 mb-2 text-sm text-gray-900 dark:text-white w-1/5">Nama Racikan<span class="text-red-600">*</span></label>
+                <input name="nama_racik" class="border border-gray-300 text-gray-900 text-sm rounded-lg p-2 w-full md:w-1/4 dark:border-gray-600 dark:text-white" required>
             </div>
 
             <div class="mb-5 sm:block md:flex items-center">
-                <label class="block mb-2 md:mb-0 text-sm text-gray-900 dark:text-white md:w-1/4">Metode Racik</label>
+                <label class="block mb-2 md:mb-0 text-sm text-gray-900 dark:text-white md:w-1/4">Metode Racik<span class="text-red-600">*</span></label>
                 <input type="text" name="kd_racik" class="border border-gray-300 text-gray-900 text-sm rounded-lg p-2 w-full lg:w-1/4 dark:border-gray-600 dark:text-white" maxlength="80" required>
-                <label class="block mt-5 md:my-0 md:ml-10 mb-2 text-sm text-gray-900 dark:text-white w-1/5">Jumlah Racik</label>
-                <input name="jml_dr" class="border border-gray-300 text-gray-900 text-sm rounded-lg p-2 w-full md:w-1/4 dark:border-gray-600 dark:text-white">
+                <label class="block mt-5 md:my-0 md:ml-10 mb-2 text-sm text-gray-900 dark:text-white w-1/5">Jumlah Racik<span class="text-red-600">*</span></label>
+                <input name="jml_dr" class="border border-gray-300 text-gray-900 text-sm rounded-lg p-2 w-full md:w-1/4 dark:border-gray-600 dark:text-white" required>
             </div>
 
             <div class="mb-5 sm:block md:flex items-center">
-                <label class="block mb-2 md:mb-0 text-sm text-gray-900 dark:text-white md:w-1/4">Aturan Pakai</label>
+                <label class="block mb-2 md:mb-0 text-sm text-gray-900 dark:text-white md:w-1/4">Aturan Pakai<span class="text-red-600">*</span></label>
                 <input type="text" name="aturan_pakai" class="border border-gray-300 text-gray-900 text-sm rounded-lg p-2 w-full lg:w-1/4 dark:border-gray-600 dark:text-white" maxlength="80" required>
                 <label class="block mt-5 md:my-0 md:ml-10 mb-2 text-sm text-gray-900 dark:text-white w-1/5">Keterangan</label>
                 <input name="keterangan" class="border border-gray-300 text-gray-900 text-sm rounded-lg p-2 w-full md:w-1/4 dark:border-gray-600 dark:text-white">
@@ -58,11 +61,14 @@
                 <label for="obat-select" class="block mb-2 md:mb-0 text-sm text-gray-900 dark:text-white md:w-1/4">Pilih Obat:</label>
                 <select id="obat-select" multiple class="border border-gray-300 text-gray-900 text-sm rounded-lg p-2 w-full lg:w-3/4 dark:border-gray-600 dark:text-white">
                     <?php foreach ($obat_list as $obat): ?>
-                        <?php if (isset($obat['kode_obat'], $obat['nama_obat'])): ?>
-                            <option value="<?= $obat['kode_obat'] ?>" data-nama="<?= $obat['nama_obat'] ?>" data-kode="<?= $obat['kode_obat'] ?>">
-                                <?= $obat['nama_obat'] ?>
-                            </option>
-                        <?php endif; ?>
+                        <option 
+                            value="<?= $obat['kode_obat'] ?>"
+                            data-nama="<?= $obat['nama_obat'] ?>"
+                            data-stok="<?= $obat['stok'] ?? 0 ?>"
+                            data-kapasitas="<?= $obat['kapasitas'] ?? 0 ?>"
+                        >
+                            <?= $obat['nama_obat'] ?>
+                        </option>
                     <?php endforeach; ?>
                 </select>
             </div>
@@ -74,12 +80,12 @@
 
 
             <div class="mb-5 sm:block md:flex items-center">
-                <label class="block mb-2 md:mb-0 text-sm text-gray-900 dark:text-white md:w-1/4">Tanggal</label>
-                <input type="text" name="diagnosa_awal" value="<?php 
+                <label class="block mb-2 md:mb-0 text-sm text-gray-900 dark:text-white md:w-1/4">Tanggal<span class="text-red-600">*</span></label>
+                <input type="date" name="diagnosa_awal" value="<?php 
                     $tanggalHariIni = date('Y-m-d');
                     echo $tanggalHariIni; ?>"class="border border-gray-300 text-gray-900 text-sm rounded-lg p-2 w-full lg:w-1/4 dark:border-gray-600 dark:text-white" maxlength="80" required>
-                <label class="block mt-5 md:my-0 md:ml-10 mb-2 text-sm text-gray-900 dark:text-white w-1/5">Jam</label>
-                <input name="diagnosa_akhir" value="<?php 
+                <label class="block mt-5 md:my-0 md:ml-10 mb-2 text-sm text-gray-900 dark:text-white w-1/5">Jam<span class="text-red-600">*</span></label>
+                <input type="time" name="diagnosa_akhir" value="<?php 
     $jamSekarang = date('H:i:s');
     echo $jamSekarang; ?>" class="border border-gray-300 text-gray-900 text-sm rounded-lg p-2 w-full md:w-1/4 dark:border-gray-600 dark:text-white">
             </div>
@@ -154,22 +160,10 @@ obatSelect.addEventListener("change", function () {
         if (selectedValues.includes(kode)) {
             if (selectedValues.includes(kode)) {
                 if (!existing) {
-                    const wrapper = document.createElement("div");
-                    wrapper.id = inputId;
-                    const token = sessionStorage.getItem('jwt_token');
-                    console.log(sessionStorage.getItem('jwt_token'));
-                    fetch(`http://127.0.0.1:8080/v1/inventory/gudang/barang/kode/${kode}`, {
-                    headers: {
-                        'Authorization': `Bearer ${token}`,
-                        'Accept': 'application/json'
-                    }
-                    })
-                    .then(res => res.json())
-                    .then(data => {
-                    console.log('API response:', data); // 👈 log the whole response
-                    const stok = data?.data?.stokminimal ?? 'N/A';
-                    const kapasitas = data?.data?.kapasitas ?? 'N/A';
-                    const token = sessionStorage.getItem('jwt_token');
+                    const option = Array.from(obatSelect.options).find(opt => opt.value === kode);
+                    const nama = option?.getAttribute("data-nama") || '';
+                    const stok = option?.getAttribute("data-stok") || '0';
+                    const kapasitas = option?.getAttribute("data-kapasitas") || '0';
 
                     const wrapper = document.createElement("div");
                     wrapper.id = `group-${kode}`;
@@ -194,7 +188,7 @@ obatSelect.addEventListener("change", function () {
 
                         <!-- Row: P1 & P2 -->
                         <div class="mb-5 sm:block md:flex items-center">
-                            <label class="block mb-2 md:mb-0 text-sm text-gray-900 dark:text-white md:w-1/4">P1/P2</label>
+                            <label class="block mb-2 md:mb-0 text-sm text-gray-900 dark:text-white md:w-1/4">P1/P2<span class="text-red-600">*</span></label>
                             <div class="flex gap-4">
                                 <input type="text" name="p1[${kode}]" placeholder="P1" class="border border-gray-300 text-gray-900 text-sm rounded-lg p-2 w-1/4 dark:border-gray-600 dark:text-white" required>
                                 <input type="text" name="p2[${kode}]" placeholder="P2" class="border border-gray-300 text-gray-900 text-sm rounded-lg p-2 w-1/4 dark:border-gray-600 dark:text-white" required>
@@ -203,11 +197,11 @@ obatSelect.addEventListener("change", function () {
 
                         <!-- Row: Kandungan & Jumlah -->
                         <div class="mb-5 sm:block md:flex items-center">
-                            <label class="block mb-2 md:mb-0 text-sm text-gray-900 dark:text-white md:w-1/4">Kandungan</label>
+                            <label class="block mb-2 md:mb-0 text-sm text-gray-900 dark:text-white md:w-1/4">Kandungan<span class="text-red-600">*</span></label>
                             <input type="number" step="0.01" name="kandungan_input[${kode}]" class="border border-gray-300 text-gray-900 text-sm rounded-lg p-2 w-full lg:w-1/4 dark:border-gray-600 dark:text-white">
 
                             <label class="block mt-5 md:my-0 md:ml-10 mb-2 text-sm text-gray-900 dark:text-white w-1/5">Jumlah</label>
-                            <input type="number" step="0.01" name="jml_input[${kode}]" class="border border-gray-300 text-gray-900 text-sm rounded-lg p-2 w-full md:w-1/4 dark:border-gray-600 dark:text-white">
+                            <input type="number" step="0.01" name="jml_input[${kode}]" class="border border-gray-300 text-gray-900 text-sm rounded-lg p-2 w-full md:w-1/4 dark:border-gray-600 dark:text-white" readonly>
                         </div>
 
                         <input type="hidden" name="kode_barang[]" value="${kode}">
@@ -215,15 +209,13 @@ obatSelect.addEventListener("change", function () {
 
                     container.appendChild(wrapper);
 
-                    // Checkbox event: remove section if unchecked
+                    // Remove section if checkbox is unchecked
                     document.getElementById(`checkbox-${kode}`).addEventListener("change", function () {
                         if (!this.checked) {
-                            document.getElementById(`group-${kode}`).remove();
+                            document.getElementById(`group-${kode}`)?.remove();
                         }
                     });
-
-                    container.appendChild(wrapper);
-                })}
+                }
             }
 
         } else {
@@ -236,6 +228,35 @@ obatSelect.addEventListener("change", function () {
         }
     });
 });
+
+document.addEventListener("DOMContentLoaded", function () {
+    const jumlahRacikInput = document.querySelector('input[name="jml_dr"]');
+
+    container.addEventListener("input", function (e) {
+        // Only trigger on kandungan, P1, or P2 input changes
+        const name = e.target.name;
+        if (!name.startsWith("kandungan_input") && !name.startsWith("p1[") && !name.startsWith("p2[")) return;
+
+        const kodeMatch = name.match(/\[(.*?)\]/);
+        if (!kodeMatch) return;
+        const kode = kodeMatch[1];
+
+        const kandungan = parseFloat(document.querySelector(`input[name="kandungan_input[${kode}]"]`)?.value) || 0;
+        const kapasitas = parseFloat(document.querySelector(`input[name="kapasitas[${kode}]"]`)?.value) || 0;
+        const jumlahRacik = parseFloat(jumlahRacikInput?.value) || 0;
+        const p1 = parseFloat(document.querySelector(`input[name="p1[${kode}]"]`)?.value) || 1;
+        const p2 = parseFloat(document.querySelector(`input[name="p2[${kode}]"]`)?.value) || 1;
+
+        const jumlahInput = document.querySelector(`input[name="jml_input[${kode}]"]`);
+
+        if (kapasitas > 0 && kandungan > 0 && jumlahRacik > 0 && p2 !== 0) {
+            const jumlah = (kandungan / kapasitas) * jumlahRacik * (p1 / p2);
+            jumlahInput.value = jumlah.toFixed(2);
+        }
+    });
+});
+
+
 
     function validateForm() {
         var requiredFields = document.querySelectorAll('select[required], input[required]');

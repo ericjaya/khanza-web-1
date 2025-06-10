@@ -376,13 +376,32 @@ foreach ($tindakan_list as $tindakan) {
     $tindakan_enriched[] = $tindakan;
 }
 
+// Step 5: Fetch Obat
+$url_obat = $this->api_url . '/pemberian-obat/' . $nomor_rawat;
+$ch_obat = curl_init($url_obat);
+curl_setopt($ch_obat, CURLOPT_RETURNTRANSFER, true);
+curl_setopt($ch_obat, CURLOPT_HTTPHEADER, [
+    'Authorization: Bearer ' . $token,
+    'Content-Type: application/json',
+]);
+$response_obat = curl_exec($ch_obat);
+curl_close($ch_obat);
 
-// dd($tindakan_enriched);
+$data_obat = json_decode($response_obat, true);
+$obat_list = $data_obat['data'] ?? [];
+
+if (is_string($obat_list)) {
+    $obat_list = json_decode($obat_list, true);
+}
+
+
+// dd($obat_list);
     return view('/admin/rujukan/cetak_surat', [
         'rujukan'      => $rujukan,
         'organisasi'   => $organisasi,
         'rawatinap'    => $rawatinap,
         'tindakanList' => $tindakan_enriched,
+        'obatList'     => $obat_list,
     ]);
 }
 

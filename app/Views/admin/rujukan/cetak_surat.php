@@ -73,7 +73,13 @@ function formatTanggalIndo($tanggal)
       <?php foreach ($tindakanList as $t): ?>
       <p>Tindakan&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: <?= $t['nama_tindakan'] ?? '-' ?> </p>
       <?php endforeach; ?>
-      <p>Terapi&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: -</p>
+<?php if (!empty($obatList)): ?>
+    <?php foreach ($obatList as $obat): ?>
+        <p>Terapi&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: <?= $obat['nama_obat'] ?? $obat['kode_obat'] ?> - <?= $obat['jumlah'] ?? '-' ?> <?= $obat['satuan'] ?? '' ?></p>
+    <?php endforeach; ?>
+<?php else: ?>
+    <p>Terapi&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: -</p>
+<?php endif; ?>
     </div>
 
     <br>

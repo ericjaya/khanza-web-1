@@ -186,7 +186,7 @@ private function curlGet(string $url, string $token): string
         $this->addBreadcrumb('User', 'user');
         $this->addBreadcrumb('Resep Obat', 'resepobatracikan');
         $this->addBreadcrumb('Tambah', 'tambah');
-
+// dd($resep);
         return view('/admin/resepobatracikan/tambah_resepobatracikan', [
             'resepobatracikan' => $resep,
             'title' => $title,
@@ -528,6 +528,7 @@ private function getObatListFromAPI($token)
     curl_close($ch);
 
     $parsed = json_decode($res, true);
+    // dd($parsed);
     return $parsed['data'] ?? [];
 }
 

@@ -107,42 +107,49 @@ obatSelect.addEventListener("change", function () {
         const existing = document.getElementById(inputId);
 
         if (selectedValues.includes(kode)) {
-            if (selectedValues.includes(kode)) {
-                if (!existing) {
-                    const wrapper = document.createElement("div");
-                    wrapper.id = inputId;
+            if (!existing) {
+                const wrapper = document.createElement("div");
+                wrapper.id = inputId;
+                wrapper.classList.add("mb-6", "border", "p-4", "rounded-xl", "shadow-sm");
 
-                    wrapper.innerHTML = `
-                    <div class="mb-6">
-                        <label class="block mb-2 text-sm font-bold text-gray-900 dark:text-white">${nama}</label>
+                wrapper.innerHTML = `
+                    <div class="flex items-center mb-2">
+                        <input type="checkbox" id="checkbox-${kode}" class="checkbox-kode mr-2 w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded" checked>
+                        <label for="checkbox-${kode}" class="text-sm font-bold text-gray-900 dark:text-white">
+                            ${nama}
+                        </label>
+                    </div>
 
-                        <!-- Row 1: Jumlah & Aturan Pakai -->
-                        <div class="mb-5 sm:block md:flex items-center">
+                    <div class="mb-5 sm:block md:flex items-center">
                         <label class="block mb-2 md:mb-0 text-sm text-gray-900 dark:text-white md:w-1/4">Jumlah</label>
                         <input type="number" name="jumlah[${kode}]" class="border border-gray-300 text-gray-900 text-sm rounded-lg p-2 w-full lg:w-1/4 dark:border-gray-600 dark:text-white" required>
 
                         <label class="block mt-5 md:my-0 md:ml-10 mb-2 text-sm text-gray-900 dark:text-white w-1/5">Aturan Pakai</label>
                         <input type="text" name="aturan_pakai[${kode}]" class="border border-gray-300 text-gray-900 text-sm rounded-lg p-2 w-full md:w-1/4 dark:border-gray-600 dark:text-white" required>
-                        </div>
-
-                        <input type="hidden" name="kode_barang[]" value="${kode}">
                     </div>
-                    `;
 
-                    container.appendChild(wrapper);
-                }
+                    <input type="hidden" name="kode_barang[]" value="${kode}">
+                `;
+
+                container.appendChild(wrapper);
+
+                // ✅ Checkbox toggle to remove
+                document.getElementById(`checkbox-${kode}`).addEventListener("change", function () {
+                    if (!this.checked) {
+                        document.getElementById(inputId).remove();
+
+                        // Optional: unselect from multiselect too
+                        option.selected = false;
+                    }
+                });
             }
-
         } else {
-            // Only remove if input field is empty
-            const jumlahInput = document.querySelector(`input[name="jumlah[${kode}]"]`);
-            if (jumlahInput && jumlahInput.value === '') {
-                const toRemove = document.getElementById(inputId);
-                if (toRemove) toRemove.remove();
-            }
+            const toRemove = document.getElementById(inputId);
+            if (toRemove) toRemove.remove();
         }
     });
 });
+
 
 document.getElementById("submitButton").addEventListener("click", async function (e) {
     e.preventDefault();

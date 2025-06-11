@@ -557,7 +557,7 @@ public function submitFromRawatinap($nomor_rawat)
     if ($data && isset($data['data'])) {
         $rawatinap = is_string($data['data']) ? json_decode($data['data'], true) : $data['data'];
 
-        // Step 2: Prepare prefill data for the form (no API submission here)
+        // Step 2: Prepare prefill data for the form
         $formData = [
             'no_resep'       => 'RSP' . date('Ymd') . rand(100, 999),
             'tgl_perawatan'  => date('Y-m-d'),
@@ -572,15 +572,34 @@ public function submitFromRawatinap($nomor_rawat)
             'nomor_rm'       => $rawatinap['nomor_rm'] ?? '',
         ];
 
+        // Step 3: Get obat list
+        $obatList = $this->getObatListFromAPI($token);
+
+        // Step 4: Fetch stok from /v1/gudang-barang
+        $stokUrl = $this->api_url . '/v1/gudang-barang';
+        $chStok = curl_init($stokUrl);
+        curl_setopt($chStok, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($chStok, CURLOPT_HTTPHEADER, [
+            'Authorization: Bearer ' . $token,
+            'Accept: application/json'
+        ]);
+        $stokResponse = curl_exec($chStok);
+        curl_close($chStok);
+
+        $stokData = json_decode($stokResponse, true);
+        $stokList = $stokData['data'] ?? [];
+
         return view('admin/resepobat/tambah_resepobat', [
             'title'      => 'Tambah Resep Dokter',
             'resepobat'  => $formData,
-            'obat_list'  => $this->getObatListFromAPI($token),
+            'obat_list'  => $obatList,
+            'stok_list'  => $stokList, // ⬅️ Pass stok data to view
         ]);
     }
 
     return redirect()->back()->with('error', 'Data rawat inap tidak ditemukan.');
 }
+
 
 
 public function submitTambahResepObatDetail()

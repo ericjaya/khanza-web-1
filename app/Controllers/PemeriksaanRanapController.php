@@ -185,7 +185,8 @@ public function dataPemeriksaanRanapDetail($noRawat)
             $response_nama = curl_exec($ch_nama);
             curl_close($ch_nama);
             $pegawai_data = json_decode($response_nama, true);
-            $item['nama_petugas'] = $pegawai_data['data']['Nama'] ?? '—';
+            $item['nama_petugas'] = $pegawai_data['nama'] ?? '—';
+            // dd($pegawai_data);
         } else {
             $item['nama_petugas'] = '—';
         }
@@ -310,7 +311,7 @@ public function dataPemeriksaanRanapDetail($noRawat)
 
     $pemeriksaan_url = $this->api_url . '/pemeriksaanranap';
     $jsonPayload = json_encode($postDataPemeriksaanRanap);
-// dd($postDataPemeriksaanRanap);
+dd($jsonPayload);
     $ch = curl_init($pemeriksaan_url);
     curl_setopt($ch, CURLOPT_POST, 1);
     curl_setopt($ch, CURLOPT_POSTFIELDS, $jsonPayload);
@@ -424,7 +425,7 @@ public function dataPemeriksaanRanapDetail($noRawat)
     $this->addBreadcrumb('Edit', 'edit');
 
     $breadcrumbs = $this->getBreadcrumbs();
-
+// dd($pemeriksaan);
     // 🔹 Pass data to view
     return view('/admin/pemeriksaanranap/edit_pemeriksaanranap', [
         'pemeriksaan' => $pemeriksaan,
@@ -456,7 +457,7 @@ public function dataPemeriksaanRanapDetail($noRawat)
 
     // Minimal required fields for update
     $postDataPemeriksaanRanap = [
-        'nomor_rawat'        => $this->request->getPost('nomor_rawat'),
+        'no_rawat'        => $this->request->getPost('nomor_rawat'),
         'tgl_perawatan'      => $this->request->getPost('tgl_perawatan'),
         'jam_rawat'          => $this->request->getPost('jam_rawat'),
         'nip'                => $this->request->getPost('nip'),
@@ -480,9 +481,9 @@ public function dataPemeriksaanRanapDetail($noRawat)
                 'keluhan'          => $this->request->getPost('keluhan'),
         'pemeriksaan'           => $this->request->getPost('pemeriksaan'),
     ];
-
+// dd($postDataPemeriksaanRanap);
     $jsonPayload = json_encode($postDataPemeriksaanRanap);
-
+dd($jsonPayload);
     $ch = curl_init($pemeriksaan_url);
     curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "PUT");
     curl_setopt($ch, CURLOPT_POSTFIELDS, $jsonPayload);
@@ -492,7 +493,7 @@ public function dataPemeriksaanRanapDetail($noRawat)
         'Content-Length: ' . strlen($jsonPayload),
         'Authorization: Bearer ' . $token,
     ]);
-
+// dd($token);
     $response = curl_exec($ch);
     $http_status = curl_getinfo($ch, CURLINFO_HTTP_CODE);
     curl_close($ch);

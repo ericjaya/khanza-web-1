@@ -28,7 +28,7 @@
                                                                     $randomString .= $characters[rand(0, $charactersLength - 1)];
                                                                 }
                                                             } else {
-                                                                return "Panjang maksimal terlalu pendek.";
+                                                                return ".";
                                                             }
 
                                                             return $randomString;
